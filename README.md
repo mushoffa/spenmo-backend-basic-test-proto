@@ -1,0 +1,1 @@
+# spenmo-backend-basic-test-proto
