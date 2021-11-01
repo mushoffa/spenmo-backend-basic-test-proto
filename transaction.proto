@@ -1,0 +1,54 @@
+syntax="proto3";
+
+option go_package = "github.com/mushoffa/spenmo-proto/protos";
+
+// @Author Ahmad Ridwan Mushoffa
+// @Created 01/05/2021
+// @Updated
+message Transaction {
+	string id = 1;
+	string accountNumber = 2;
+	string pan = 3;
+	double amount = 4;
+	string date = 5;
+	string time = 6;
+	string issuerId = 7;
+	// memberId => wallet id
+	string referenceNumber = 8;
+}
+
+// @Author Ahmad Ridwan Mushoffa
+// @Created 01/05/2021
+// @Updated
+message PurchaseRequest {
+	
+}
+
+// @Author Ahmad Ridwan Mushoffa
+// @Created 01/05/2021
+// @Updated
+message PurchaseResponse {
+	
+}
+
+// @Author Ahmad Ridwan Mushoffa
+// @Created 01/05/2021
+// @Updated
+message TopupRequest {
+	
+}
+
+// @Author Ahmad Ridwan Mushoffa
+// @Created 01/05/2021
+// @Updated
+message TopupResponse {
+	
+}
+
+// @Author Ahmad Ridwan Mushoffa
+// @Created 01/05/2021
+// @Updated
+service TransactionService {
+	rpc Purchase(PurchaseRequest) returns(PurchaseResponse);
+	rpc Topup(TopupRequest) returns(TopupResponse);
+}
