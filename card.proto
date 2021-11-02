@@ -3,7 +3,7 @@ syntax="proto3";
 option go_package = "github.com/mushoffa/spenmo-proto/protos";
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 message Card {
 	string id = 1;
@@ -18,7 +18,7 @@ message Card {
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 message CreateCardRequest {
 	string pan = 1;
@@ -27,28 +27,28 @@ message CreateCardRequest {
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 message CreateCardResponse {
 	Card card = 1;
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 message InquiryCardRequest {
 	string id = 1;		// Card ID
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 message InquiryCardResponse {
 	Card card = 1;
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 message LinkCardRequest {
 	string id = 1;			// Card ID
@@ -56,14 +56,14 @@ message LinkCardRequest {
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 message LinkCardResponse {
 	Card card = 1;
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 service CardService {
 	rpc CreateCard(CreateCardRequest) returns(CreateCardResponse);

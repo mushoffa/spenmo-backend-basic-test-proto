@@ -3,61 +3,64 @@ syntax="proto3";
 option go_package = "github.com/mushoffa/spenmo-proto/protos";
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
-// @Updated
+// @Created 01/11/2021
+// @Updated 02/11/2021
 message Wallet {
 	string id = 1;
 	string created = 2;
 	string updated = 3;
-	double balance = 4;
-	string userId = 5;
+	string name = 4;
+	double balance = 5;
+	string userId = 6;
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
-// @Updated
+// @Created 01/11/2021
+// @Updated 02/11/2021
 message CreateWalletRequest {
 	string userId = 1;
+	string name = 2;
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 message CreateWalletResponse {
 	Wallet wallet = 1;
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 message InquiryBalanceRequest {
 	string id = 1;		// Wallet ID
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 message InquiryBalanceResponse {
 	Wallet wallet = 1;
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
-// @Updated
+// @Created 01/11/2021
+// @Updated 02/11/2021
 message UpdateBalanceRequest {
 	string id = 1;		// Wallet ID
-	double amount = 2;
+	string userId = 2;
+	double amount = 3;
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 message UpdateBalanceResponse {
 	Wallet wallet = 1;
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 service WalletService {
 	rpc CreateWallet(CreateWalletRequest) returns(CreateWalletResponse);

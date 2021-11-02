@@ -26,7 +26,7 @@ const (
 const _ = proto.ProtoPackageIsVersion4
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 type Card struct {
 	state         protoimpl.MessageState
@@ -140,7 +140,7 @@ func (x *Card) GetPin() uint32 {
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 type CreateCardRequest struct {
 	state         protoimpl.MessageState
@@ -206,7 +206,7 @@ func (x *CreateCardRequest) GetLimitMonthly() float64 {
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 type CreateCardResponse struct {
 	state         protoimpl.MessageState
@@ -256,7 +256,7 @@ func (x *CreateCardResponse) GetCard() *Card {
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 type InquiryCardRequest struct {
 	state         protoimpl.MessageState
@@ -306,7 +306,7 @@ func (x *InquiryCardRequest) GetId() string {
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 type InquiryCardResponse struct {
 	state         protoimpl.MessageState
@@ -356,7 +356,7 @@ func (x *InquiryCardResponse) GetCard() *Card {
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 type LinkCardRequest struct {
 	state         protoimpl.MessageState
@@ -414,7 +414,7 @@ func (x *LinkCardRequest) GetWalletId() string {
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 type LinkCardResponse struct {
 	state         protoimpl.MessageState

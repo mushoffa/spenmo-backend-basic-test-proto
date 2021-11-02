@@ -26,7 +26,7 @@ const (
 const _ = proto.ProtoPackageIsVersion4
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 type User struct {
 	state         protoimpl.MessageState
@@ -116,7 +116,7 @@ func (x *User) GetDob() string {
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 type RegisterUserRequest struct {
 	state         protoimpl.MessageState
@@ -190,7 +190,7 @@ func (x *RegisterUserRequest) GetDob() string {
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 type RegisterUserResponse struct {
 	state         protoimpl.MessageState
@@ -240,7 +240,7 @@ func (x *RegisterUserResponse) GetUser() *User {
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 type InquiryUserRequest struct {
 	state         protoimpl.MessageState
@@ -290,7 +290,7 @@ func (x *InquiryUserRequest) GetPhoneNumber() string {
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 type InquiryUserResponse struct {
 	state         protoimpl.MessageState

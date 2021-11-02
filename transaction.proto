@@ -3,7 +3,7 @@ syntax="proto3";
 option go_package = "github.com/mushoffa/spenmo-proto/protos";
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 message Transaction {
 	string id = 1;
@@ -18,35 +18,35 @@ message Transaction {
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 message PurchaseRequest {
 	
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 message PurchaseResponse {
 	
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 message TopupRequest {
 	
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 message TopupResponse {
 	
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 service TransactionService {
 	rpc Purchase(PurchaseRequest) returns(PurchaseResponse);

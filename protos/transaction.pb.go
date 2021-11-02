@@ -26,7 +26,7 @@ const (
 const _ = proto.ProtoPackageIsVersion4
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 type Transaction struct {
 	state         protoimpl.MessageState
@@ -133,7 +133,7 @@ func (x *Transaction) GetReferenceNumber() string {
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 type PurchaseRequest struct {
 	state         protoimpl.MessageState
@@ -174,7 +174,7 @@ func (*PurchaseRequest) Descriptor() ([]byte, []int) {
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 type PurchaseResponse struct {
 	state         protoimpl.MessageState
@@ -215,7 +215,7 @@ func (*PurchaseResponse) Descriptor() ([]byte, []int) {
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 type TopupRequest struct {
 	state         protoimpl.MessageState
@@ -256,7 +256,7 @@ func (*TopupRequest) Descriptor() ([]byte, []int) {
 }
 
 // @Author Ahmad Ridwan Mushoffa
-// @Created 01/05/2021
+// @Created 01/11/2021
 // @Updated
 type TopupResponse struct {
 	state         protoimpl.MessageState
