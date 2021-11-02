@@ -29,8 +29,9 @@ message Card {
 message CreateCardRequest {
 	string pan = 1;
 	string expiryDate = 2;
-	double limitDaily = 3;
-	double limitMonthly = 4;
+	string cardType = 3;
+	double limitDaily = 4;
+	double limitMonthly = 5;
 }
 
 // @Author Ahmad Ridwan Mushoffa
