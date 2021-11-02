@@ -21,6 +21,7 @@ type WalletServiceClient interface {
 	CreateWallet(ctx context.Context, in *CreateWalletRequest, opts ...grpc.CallOption) (*CreateWalletResponse, error)
 	InquiryBalance(ctx context.Context, in *InquiryBalanceRequest, opts ...grpc.CallOption) (*InquiryBalanceResponse, error)
 	UpdateBalance(ctx context.Context, in *UpdateBalanceRequest, opts ...grpc.CallOption) (*UpdateBalanceResponse, error)
+	UpdateLimit(ctx context.Context, in *UpdateLimitRequest, opts ...grpc.CallOption) (*UpdateLimitResponse, error)
 }
 
 type walletServiceClient struct {
@@ -58,6 +59,15 @@ func (c *walletServiceClient) UpdateBalance(ctx context.Context, in *UpdateBalan
 	return out, nil
 }
 
+func (c *walletServiceClient) UpdateLimit(ctx context.Context, in *UpdateLimitRequest, opts ...grpc.CallOption) (*UpdateLimitResponse, error) {
+	out := new(UpdateLimitResponse)
+	err := c.cc.Invoke(ctx, "/WalletService/UpdateLimit", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WalletServiceServer is the server API for WalletService service.
 // All implementations must embed UnimplementedWalletServiceServer
 // for forward compatibility
@@ -65,6 +75,7 @@ type WalletServiceServer interface {
 	CreateWallet(context.Context, *CreateWalletRequest) (*CreateWalletResponse, error)
 	InquiryBalance(context.Context, *InquiryBalanceRequest) (*InquiryBalanceResponse, error)
 	UpdateBalance(context.Context, *UpdateBalanceRequest) (*UpdateBalanceResponse, error)
+	UpdateLimit(context.Context, *UpdateLimitRequest) (*UpdateLimitResponse, error)
 	mustEmbedUnimplementedWalletServiceServer()
 }
 
@@ -80,6 +91,9 @@ func (UnimplementedWalletServiceServer) InquiryBalance(context.Context, *Inquiry
 }
 func (UnimplementedWalletServiceServer) UpdateBalance(context.Context, *UpdateBalanceRequest) (*UpdateBalanceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateBalance not implemented")
+}
+func (UnimplementedWalletServiceServer) UpdateLimit(context.Context, *UpdateLimitRequest) (*UpdateLimitResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateLimit not implemented")
 }
 func (UnimplementedWalletServiceServer) mustEmbedUnimplementedWalletServiceServer() {}
 
@@ -148,6 +162,24 @@ func _WalletService_UpdateBalance_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _WalletService_UpdateLimit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateLimitRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServiceServer).UpdateLimit(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/WalletService/UpdateLimit",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServiceServer).UpdateLimit(ctx, req.(*UpdateLimitRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // WalletService_ServiceDesc is the grpc.ServiceDesc for WalletService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -166,6 +198,10 @@ var WalletService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateBalance",
 			Handler:    _WalletService_UpdateBalance_Handler,
+		},
+		{
+			MethodName: "UpdateLimit",
+			Handler:    _WalletService_UpdateLimit_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

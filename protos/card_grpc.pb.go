@@ -7,6 +7,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -19,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CardServiceClient interface {
 	CreateCard(ctx context.Context, in *CreateCardRequest, opts ...grpc.CallOption) (*CreateCardResponse, error)
+	GetAllCards(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetAllCardsResponse, error)
 	InquiryCard(ctx context.Context, in *InquiryCardRequest, opts ...grpc.CallOption) (*InquiryCardResponse, error)
 	LinkCard(ctx context.Context, in *LinkCardRequest, opts ...grpc.CallOption) (*LinkCardResponse, error)
 }
@@ -34,6 +36,15 @@ func NewCardServiceClient(cc grpc.ClientConnInterface) CardServiceClient {
 func (c *cardServiceClient) CreateCard(ctx context.Context, in *CreateCardRequest, opts ...grpc.CallOption) (*CreateCardResponse, error) {
 	out := new(CreateCardResponse)
 	err := c.cc.Invoke(ctx, "/CardService/CreateCard", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cardServiceClient) GetAllCards(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetAllCardsResponse, error) {
+	out := new(GetAllCardsResponse)
+	err := c.cc.Invoke(ctx, "/CardService/GetAllCards", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -63,6 +74,7 @@ func (c *cardServiceClient) LinkCard(ctx context.Context, in *LinkCardRequest, o
 // for forward compatibility
 type CardServiceServer interface {
 	CreateCard(context.Context, *CreateCardRequest) (*CreateCardResponse, error)
+	GetAllCards(context.Context, *emptypb.Empty) (*GetAllCardsResponse, error)
 	InquiryCard(context.Context, *InquiryCardRequest) (*InquiryCardResponse, error)
 	LinkCard(context.Context, *LinkCardRequest) (*LinkCardResponse, error)
 	mustEmbedUnimplementedCardServiceServer()
@@ -74,6 +86,9 @@ type UnimplementedCardServiceServer struct {
 
 func (UnimplementedCardServiceServer) CreateCard(context.Context, *CreateCardRequest) (*CreateCardResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateCard not implemented")
+}
+func (UnimplementedCardServiceServer) GetAllCards(context.Context, *emptypb.Empty) (*GetAllCardsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllCards not implemented")
 }
 func (UnimplementedCardServiceServer) InquiryCard(context.Context, *InquiryCardRequest) (*InquiryCardResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method InquiryCard not implemented")
@@ -108,6 +123,24 @@ func _CardService_CreateCard_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CardServiceServer).CreateCard(ctx, req.(*CreateCardRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CardService_GetAllCards_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CardServiceServer).GetAllCards(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/CardService/GetAllCards",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CardServiceServer).GetAllCards(ctx, req.(*emptypb.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -158,6 +191,10 @@ var CardService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateCard",
 			Handler:    _CardService_CreateCard_Handler,
+		},
+		{
+			MethodName: "GetAllCards",
+			Handler:    _CardService_GetAllCards_Handler,
 		},
 		{
 			MethodName: "InquiryCard",
