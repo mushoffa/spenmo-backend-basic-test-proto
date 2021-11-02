@@ -2,28 +2,35 @@ syntax="proto3";
 
 option go_package = "github.com/mushoffa/spenmo-proto/protos";
 
+import "google/protobuf/empty.proto";
+
 // @Author Ahmad Ridwan Mushoffa
 // @Created 01/11/2021
-// @Updated
+// @Updated 02/11/2021
 message Card {
 	string id = 1;
 	string created = 2;
 	string updated = 3;
 	string pan = 4;
 	string name = 5;
-	double limitDaily = 6;
-	double limitMonthly = 7;
-	string status = 8;
-	uint32 pin = 9;
+	string expiryDate = 6;
+	double limitDaily = 7;
+	double limitMonthly = 8;
+	string type = 9;
+	string status = 10;
+	uint32 pin = 11;
+	string walletId = 12;
+	string userId = 13;
 }
 
 // @Author Ahmad Ridwan Mushoffa
 // @Created 01/11/2021
-// @Updated
+// @Updated 02/11/2021
 message CreateCardRequest {
 	string pan = 1;
-	double limitDaily = 2;
-	double limitMonthly = 3;
+	string expiryDate = 2;
+	double limitDaily = 3;
+	double limitMonthly = 4;
 }
 
 // @Author Ahmad Ridwan Mushoffa
@@ -31,6 +38,13 @@ message CreateCardRequest {
 // @Updated
 message CreateCardResponse {
 	Card card = 1;
+}
+
+// @Author Ahmad Ridwan Mushoffa
+// @Created 02/11/2021
+// @Updated
+message GetAllCardsResponse {
+	repeated Card cards = 1;
 }
 
 // @Author Ahmad Ridwan Mushoffa
@@ -49,10 +63,11 @@ message InquiryCardResponse {
 
 // @Author Ahmad Ridwan Mushoffa
 // @Created 01/11/2021
-// @Updated
+// @Updated 02/11/2021
 message LinkCardRequest {
 	string id = 1;			// Card ID
 	string walletId = 2;	// Wallet ID
+	string userId = 3;		// User ID
 }
 
 // @Author Ahmad Ridwan Mushoffa
@@ -64,9 +79,10 @@ message LinkCardResponse {
 
 // @Author Ahmad Ridwan Mushoffa
 // @Created 01/11/2021
-// @Updated
+// @Updated 02/11/2021
 service CardService {
 	rpc CreateCard(CreateCardRequest) returns(CreateCardResponse);
+	rpc GetAllCards(google.protobuf.Empty) returns(GetAllCardsResponse);
 	rpc InquiryCard(InquiryCardRequest) returns(InquiryCardResponse);
 	rpc LinkCard(LinkCardRequest) returns(LinkCardResponse);
 }
