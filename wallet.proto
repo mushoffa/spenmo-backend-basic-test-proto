@@ -32,6 +32,20 @@ message CreateWalletResponse {
 }
 
 // @Author Ahmad Ridwan Mushoffa
+// @Created 03/11/2021
+// @Updated
+message GetByUserIDRequest {
+	string userId = 1;
+}
+
+// @Author Ahmad Ridwan Mushoffa
+// @Created 03/11/2021
+// @Updated
+message GetByUserIDResponse {
+	repeated Wallet wallets = 1;
+}
+
+// @Author Ahmad Ridwan Mushoffa
 // @Created 01/11/2021
 // @Updated
 message InquiryBalanceRequest {
@@ -80,6 +94,7 @@ message UpdateLimitResponse {
 // @Updated 02/11/2021
 service WalletService {
 	rpc CreateWallet(CreateWalletRequest) returns(CreateWalletResponse);
+	rpc GetByUserID(GetByUserIDRequest) returns(GetByUserIDResponse);
 	rpc InquiryBalance(InquiryBalanceRequest) returns(InquiryBalanceResponse);
 	rpc UpdateBalance(UpdateBalanceRequest) returns(UpdateBalanceResponse);
 	rpc UpdateLimit(UpdateLimitRequest) returns(UpdateLimitResponse);

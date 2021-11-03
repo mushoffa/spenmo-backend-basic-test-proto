@@ -4,51 +4,76 @@ option go_package = "github.com/mushoffa/spenmo-proto/protos";
 
 // @Author Ahmad Ridwan Mushoffa
 // @Created 01/11/2021
-// @Updated
+// @Updated 03/11/2021
 message Transaction {
 	string id = 1;
-	string accountNumber = 2;
-	string pan = 3;
-	double amount = 4;
-	string date = 5;
-	string time = 6;
-	string issuerId = 7;
+	string date = 2;
+	string time = 3;
+	string accountNumber = 4;
+	string accountName = 5;
+	string pan = 6;
+	string walletId = 7;
+	string walletName = 8;
+	double amount = 9;
+	//string issuerId = 7;
 	// memberId => wallet id
-	string referenceNumber = 8;
+	string transactionType = 10;		// DEBIT or TOPUP
+	string referenceNumber = 11;
+	string status = 12;
+	string description = 13;
 }
+
+// @Author Ahmad Ridwan Mushoffa
+// @Created 03/11/2021
+// @Updated
+message CreateTransactionRequest {
+	
+}
+
+// @Author Ahmad Ridwan Mushoffa
+// @Created 03/11/2021
+// @Updated
+message CreateTransactionResponse {
+	
+}
+
 
 // @Author Ahmad Ridwan Mushoffa
 // @Created 01/11/2021
 // @Updated
 message PurchaseRequest {
-	
+	string pan = 1;
+	double amount = 2;
 }
 
 // @Author Ahmad Ridwan Mushoffa
 // @Created 01/11/2021
 // @Updated
 message PurchaseResponse {
-	
+	Transaction transaction = 1;
 }
 
 // @Author Ahmad Ridwan Mushoffa
 // @Created 01/11/2021
-// @Updated
+// @Updated 03/11/2021
 message TopupRequest {
-	
+	string accountNumber = 1;
+	string walletId = 2;
+	double amount = 3;
 }
 
 // @Author Ahmad Ridwan Mushoffa
 // @Created 01/11/2021
 // @Updated
 message TopupResponse {
-	
+	Transaction transaction = 1;
 }
 
 // @Author Ahmad Ridwan Mushoffa
 // @Created 01/11/2021
-// @Updated
+// @Updated 03/11/2021
 service TransactionService {
+	rpc CreateTransaction(CreateTransactionRequest) returns(CreateTransactionResponse);
 	rpc Purchase(PurchaseRequest) returns(PurchaseResponse);
 	rpc Topup(TopupRequest) returns(TopupResponse);
 }

@@ -19,6 +19,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type WalletServiceClient interface {
 	CreateWallet(ctx context.Context, in *CreateWalletRequest, opts ...grpc.CallOption) (*CreateWalletResponse, error)
+	GetByUserID(ctx context.Context, in *GetByUserIDRequest, opts ...grpc.CallOption) (*GetByUserIDResponse, error)
 	InquiryBalance(ctx context.Context, in *InquiryBalanceRequest, opts ...grpc.CallOption) (*InquiryBalanceResponse, error)
 	UpdateBalance(ctx context.Context, in *UpdateBalanceRequest, opts ...grpc.CallOption) (*UpdateBalanceResponse, error)
 	UpdateLimit(ctx context.Context, in *UpdateLimitRequest, opts ...grpc.CallOption) (*UpdateLimitResponse, error)
@@ -35,6 +36,15 @@ func NewWalletServiceClient(cc grpc.ClientConnInterface) WalletServiceClient {
 func (c *walletServiceClient) CreateWallet(ctx context.Context, in *CreateWalletRequest, opts ...grpc.CallOption) (*CreateWalletResponse, error) {
 	out := new(CreateWalletResponse)
 	err := c.cc.Invoke(ctx, "/WalletService/CreateWallet", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletServiceClient) GetByUserID(ctx context.Context, in *GetByUserIDRequest, opts ...grpc.CallOption) (*GetByUserIDResponse, error) {
+	out := new(GetByUserIDResponse)
+	err := c.cc.Invoke(ctx, "/WalletService/GetByUserID", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -73,6 +83,7 @@ func (c *walletServiceClient) UpdateLimit(ctx context.Context, in *UpdateLimitRe
 // for forward compatibility
 type WalletServiceServer interface {
 	CreateWallet(context.Context, *CreateWalletRequest) (*CreateWalletResponse, error)
+	GetByUserID(context.Context, *GetByUserIDRequest) (*GetByUserIDResponse, error)
 	InquiryBalance(context.Context, *InquiryBalanceRequest) (*InquiryBalanceResponse, error)
 	UpdateBalance(context.Context, *UpdateBalanceRequest) (*UpdateBalanceResponse, error)
 	UpdateLimit(context.Context, *UpdateLimitRequest) (*UpdateLimitResponse, error)
@@ -85,6 +96,9 @@ type UnimplementedWalletServiceServer struct {
 
 func (UnimplementedWalletServiceServer) CreateWallet(context.Context, *CreateWalletRequest) (*CreateWalletResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateWallet not implemented")
+}
+func (UnimplementedWalletServiceServer) GetByUserID(context.Context, *GetByUserIDRequest) (*GetByUserIDResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetByUserID not implemented")
 }
 func (UnimplementedWalletServiceServer) InquiryBalance(context.Context, *InquiryBalanceRequest) (*InquiryBalanceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method InquiryBalance not implemented")
@@ -122,6 +136,24 @@ func _WalletService_CreateWallet_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(WalletServiceServer).CreateWallet(ctx, req.(*CreateWalletRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WalletService_GetByUserID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetByUserIDRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServiceServer).GetByUserID(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/WalletService/GetByUserID",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServiceServer).GetByUserID(ctx, req.(*GetByUserIDRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -190,6 +222,10 @@ var WalletService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateWallet",
 			Handler:    _WalletService_CreateWallet_Handler,
+		},
+		{
+			MethodName: "GetByUserID",
+			Handler:    _WalletService_GetByUserID_Handler,
 		},
 		{
 			MethodName: "InquiryBalance",
