@@ -2,6 +2,8 @@ syntax="proto3";
 
 option go_package = "github.com/mushoffa/spenmo-proto/protos";
 
+import "google/protobuf/empty.proto";
+
 // @Author Ahmad Ridwan Mushoffa
 // @Created 01/11/2021
 // @Updated
@@ -32,6 +34,13 @@ message RegisterUserResponse {
 }
 
 // @Author Ahmad Ridwan Mushoffa
+// @Created 03/11/2021
+// @Updated
+message GetAllUsersResponse {
+	repeated User users = 1;
+}
+
+// @Author Ahmad Ridwan Mushoffa
 // @Created 01/11/2021
 // @Updated
 message InquiryUserRequest {
@@ -47,8 +56,9 @@ message InquiryUserResponse {
 
 // @Author Ahmad Ridwan Mushoffa
 // @Created 01/11/2021
-// @Updated
+// @Updated 03/11/2021
 service UserService {
 	rpc RegisterUser(RegisterUserRequest) returns(RegisterUserResponse);
+	rpc GetAllUsers(google.protobuf.Empty) returns(GetAllUsersResponse);
 	rpc InquiryUser(InquiryUserRequest) returns(InquiryUserResponse);
 }
