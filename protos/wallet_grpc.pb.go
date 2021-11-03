@@ -7,6 +7,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -20,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion7
 type WalletServiceClient interface {
 	CreateWallet(ctx context.Context, in *CreateWalletRequest, opts ...grpc.CallOption) (*CreateWalletResponse, error)
 	GetByUserID(ctx context.Context, in *GetByUserIDRequest, opts ...grpc.CallOption) (*GetByUserIDResponse, error)
+	GetAllWallets(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetAllWalletsResponse, error)
 	InquiryBalance(ctx context.Context, in *InquiryBalanceRequest, opts ...grpc.CallOption) (*InquiryBalanceResponse, error)
 	UpdateBalance(ctx context.Context, in *UpdateBalanceRequest, opts ...grpc.CallOption) (*UpdateBalanceResponse, error)
 	UpdateLimit(ctx context.Context, in *UpdateLimitRequest, opts ...grpc.CallOption) (*UpdateLimitResponse, error)
@@ -45,6 +47,15 @@ func (c *walletServiceClient) CreateWallet(ctx context.Context, in *CreateWallet
 func (c *walletServiceClient) GetByUserID(ctx context.Context, in *GetByUserIDRequest, opts ...grpc.CallOption) (*GetByUserIDResponse, error) {
 	out := new(GetByUserIDResponse)
 	err := c.cc.Invoke(ctx, "/WalletService/GetByUserID", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *walletServiceClient) GetAllWallets(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetAllWalletsResponse, error) {
+	out := new(GetAllWalletsResponse)
+	err := c.cc.Invoke(ctx, "/WalletService/GetAllWallets", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -84,6 +95,7 @@ func (c *walletServiceClient) UpdateLimit(ctx context.Context, in *UpdateLimitRe
 type WalletServiceServer interface {
 	CreateWallet(context.Context, *CreateWalletRequest) (*CreateWalletResponse, error)
 	GetByUserID(context.Context, *GetByUserIDRequest) (*GetByUserIDResponse, error)
+	GetAllWallets(context.Context, *emptypb.Empty) (*GetAllWalletsResponse, error)
 	InquiryBalance(context.Context, *InquiryBalanceRequest) (*InquiryBalanceResponse, error)
 	UpdateBalance(context.Context, *UpdateBalanceRequest) (*UpdateBalanceResponse, error)
 	UpdateLimit(context.Context, *UpdateLimitRequest) (*UpdateLimitResponse, error)
@@ -99,6 +111,9 @@ func (UnimplementedWalletServiceServer) CreateWallet(context.Context, *CreateWal
 }
 func (UnimplementedWalletServiceServer) GetByUserID(context.Context, *GetByUserIDRequest) (*GetByUserIDResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetByUserID not implemented")
+}
+func (UnimplementedWalletServiceServer) GetAllWallets(context.Context, *emptypb.Empty) (*GetAllWalletsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllWallets not implemented")
 }
 func (UnimplementedWalletServiceServer) InquiryBalance(context.Context, *InquiryBalanceRequest) (*InquiryBalanceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method InquiryBalance not implemented")
@@ -154,6 +169,24 @@ func _WalletService_GetByUserID_Handler(srv interface{}, ctx context.Context, de
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(WalletServiceServer).GetByUserID(ctx, req.(*GetByUserIDRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WalletService_GetAllWallets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalletServiceServer).GetAllWallets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/WalletService/GetAllWallets",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalletServiceServer).GetAllWallets(ctx, req.(*emptypb.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -226,6 +259,10 @@ var WalletService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetByUserID",
 			Handler:    _WalletService_GetByUserID_Handler,
+		},
+		{
+			MethodName: "GetAllWallets",
+			Handler:    _WalletService_GetAllWallets_Handler,
 		},
 		{
 			MethodName: "InquiryBalance",
