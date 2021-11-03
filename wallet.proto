@@ -6,7 +6,7 @@ import "google/protobuf/empty.proto";
 
 // @Author Ahmad Ridwan Mushoffa
 // @Created 01/11/2021
-// @Updated 02/11/2021
+// @Updated 03/11/2021
 message Wallet {
 	string id = 1;
 	string created = 2;
@@ -14,14 +14,14 @@ message Wallet {
 	string name = 4;
 	double balance = 5;
 	double maxLimit = 6;
-	string userId = 7;
+	string accountNumber = 7;
 }
 
 // @Author Ahmad Ridwan Mushoffa
 // @Created 01/11/2021
-// @Updated 02/11/2021
+// @Updated 03/11/2021
 message CreateWalletRequest {
-	string userId = 1;
+	string accountNumber = 1;
 	string name = 2;
 	double maxLimit = 3;
 }
@@ -37,7 +37,7 @@ message CreateWalletResponse {
 // @Created 03/11/2021
 // @Updated
 message GetByUserIDRequest {
-	string userId = 1;
+	string accountNumber = 1;
 }
 
 // @Author Ahmad Ridwan Mushoffa
@@ -70,10 +70,10 @@ message InquiryBalanceResponse {
 
 // @Author Ahmad Ridwan Mushoffa
 // @Created 01/11/2021
-// @Updated 02/11/2021
+// @Updated 03/11/2021
 message UpdateBalanceRequest {
 	string id = 1;		// Wallet ID
-	string userId = 2;
+	string accountNumber = 2;
 	double amount = 3;
 }
 
